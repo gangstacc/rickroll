@@ -1,33 +1,48 @@
 <!DOCTYPE html>
-<html>
-   <body>
-       <video autoplay loop width="100%">
-
-    <source src="rickroll.mp4"
-            type="video/mp4">
-
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Loading...</title>
+  <style>
+    body {
+      margin: 0;
+      background-color: black;
+      color: white;
+      font-family: sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      transition: opacity 1s ease;
+    }
+    #loading {
+      font-size: 1.5em;
+    }
+    video {
+      display: none;
+      width: 100%;
+      height: 100vh;
+      object-fit: cover;
+    }
+  </style>
+</head>
+<body>
+  <div id="loading">Loading...</div>
+  <video id="rickroll" autoplay loop muted playsinline>
+    <source src="rickroll.mp4" type="video/mp4">
     Sorry, your browser doesn't support embedded videos.
-</video>
-      <script>
-         // Change the variables below to your liking
-         const currentURL = "rickroll.mp4";
-         const pageTitle = "Loading...";
-         // End of changable variables
-         
-         function setTitle() {
-            document.title = pageTitle;
-         }
-         
-         function redirect() {
-            window.location.href = currentURL;
-         }
-         
-         function onload() {
-            setTitle();
-            redirect();
-         }
-         
-         window.onload = onload();
-       </script>
-   </body>
+  </video>
+
+  <script>
+    window.addEventListener("load", () => {
+      setTimeout(() => {
+        document.getElementById("loading").style.display = "none";
+        const video = document.getElementById("rickroll");
+        video.style.display = "block";
+        document.title = "Enjoy :)";
+        video.play().catch(() => console.log("Autoplay blocked"));
+      }, 2000); // задержка 2 секунды перед показом видео
+    });
+  </script>
+</body>
 </html>
